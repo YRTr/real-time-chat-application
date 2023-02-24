@@ -10,11 +10,12 @@
   "author": "yrtravi",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.2",
+    "bad-words": "^3.0.4",
+    "express": "^4.18.2",
     "path": "^0.12.7",
-    "socket.io": "^4.4.1"
+    "socket.io": "^4.6.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.20"
   }
 }
