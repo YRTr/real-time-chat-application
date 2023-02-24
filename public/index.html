@@ -9,7 +9,6 @@
     <div id="messages"></div>
 
     <form id="message-form">
-        <label for="text-input">Type a message: </label>
         <input id="text-input" type="text" name="message" placeholder="Message...">
         <button>Send</button>
     </form>
@@ -17,13 +16,13 @@
 
     <script id="message-template" type="text/html">
         <div>
-            <p>{{message}}</p>
+            <p>{{createdAt}} - {{message}}</p>
         </div>
     </script>
 
     <script id="location-message-template" type="text/html">
         <div>
-            <p><a href="{{url}}" target="_blank">My current location</a></p>
+            <p>{{createdAt}} - <a href="{{url}}" target="_blank">My current location</a></p>
         </div>
     </script>
 
