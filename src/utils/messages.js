@@ -11,6 +11,7 @@ const generateLocationMessage = (url) => {
         createdAt: new Date.getTime()
     }
 }
-module.export = {
-    generateMessage
+module.exports = {
+    generateMessage,
+    generateLocationMessage
 }
