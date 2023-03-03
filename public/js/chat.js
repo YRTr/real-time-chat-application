@@ -1,4 +1,4 @@
-let socket = io();
+const socket = io();
 
 // Elements
 const $messageForm = document.querySelector('#message-form');
@@ -12,12 +12,13 @@ const messageTemplate = document.querySelector('#message-template').innerHTML;
 const locationMessageTemplate = document.querySelector('#location-message-template').innerHTML;
 
 // Options
-const { username, room } = Qs.parse(location.search, {ignoreQueryPrefix: true})
+const {username, room} = Qs.parse(location.search, {ignoreQueryPrefix: true})
 
 
 socket.on('message', (message) => {
     console.log(message);
     const html = Mustache.render(messageTemplate, {
+        username: message.username,
         message: message.text,
         createdAt: moment(message.createdAt).format('h:mm a')
     });
@@ -27,6 +28,7 @@ socket.on('message', (message) => {
 socket.on('locationMessage', (message) => {
     console.log(message)
     const html = Mustache.render(locationMessageTemplate, {
+        username: message.username,
         url: message.url,
         createdAt: moment(message.createdAt).format('h:mm a')
     })
@@ -42,10 +44,9 @@ $messageForm.addEventListener('submit', (e) => {
     const message = e.target.elements.message.value;
 
     socket.emit('sendMessage', message, (error) => {
-        $messageFormButton.removeAttribute('disabled')
-        $messageFormInput.value=''
-        $messageFormInput.focus()
-
+        $messageFormButton.removeAttribute('disabled');
+        $messageFormInput.value='';
+        $messageFormInput.focus();
 
         if(error){
             return console.log(error)
@@ -56,11 +57,9 @@ $messageForm.addEventListener('submit', (e) => {
 
 $shareLocationButton.addEventListener('click', () => {
     if(!navigator.geolocation){
-        return alert('Geoloction is not supported by you browser');
+        return alert('Geolocation is not supported by you browser');
     }
-
     $shareLocationButton.setAttribute('disabled', 'disabled');
-
     navigator.geolocation.getCurrentPosition((position) => {
         socket.emit('sendLocation', {
             latitude: position.coords.latitude,

@@ -1,6 +1,6 @@
 const users = []
 
-const addUser = ({ id, username, room }) => {
+const addUser = ({id, username, room}) => {
     // clean the data
     username = username.trim().toLowerCase()
     room = room.trim().toLowerCase()
@@ -13,9 +13,7 @@ const addUser = ({ id, username, room }) => {
     }
 
     // check for existing user
-    const  existingUser = users.find((user) => {
-        return user.room === room && user.username === username;
-    })
+    const  existingUser = users.find((user) => user.room === room && user.username === username)
 
     // validate username
     if(existingUser){
@@ -25,13 +23,13 @@ const addUser = ({ id, username, room }) => {
     }
 
     // store user
-    const user = { id, username, room}
+    const user = {id, username, room}
     users.push(user)
-    return { user }
+    return {user}
 }
 
 const removeUser = (id) => {
-    const index = users.findIndex((user) => user.id === id)
+    const index = users.findIndex((user) => user.id === id);
 
     if(index !== -1){
         return users.splice(index, 1)[0]
@@ -43,7 +41,6 @@ const getUser = (id) => {
 }
 
 const getUsersInRoom = (room) => {
-    room = room.trim().toLowerCase();
     return users.filter((user) => user.room === room)
 }
 
